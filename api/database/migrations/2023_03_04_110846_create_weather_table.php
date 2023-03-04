@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Weather;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,6 +14,14 @@ return new class extends Migration
     {
         Schema::create('weather', function (Blueprint $table) {
             $table->id();
+            $table->foreignId(column: 'user_id')
+                ->constrained();
+            $table->enum(column: 'type', allowed: Weather::TYPES);
+            $table->json(column: 'weather');
+            $table->json(column: 'main');
+            $table->json(column: 'wind');
+            $table->json(column: 'rain');
+            $table->json(column: 'clouds');
             $table->timestamps();
         });
     }

@@ -17,8 +17,7 @@ class UserWeatherApiController extends Controller
         $users_weather_data = $this->weather_api_service
             ->fetch_weather_data_for_all_user();
 
-        // return response()->json(data: $users_weather_data);
-        return response()->json(data: ["message" => "Hello World Index"]);
+        return response()->json(data: $users_weather_data);
     }
 
     public function show(Request $request, User $user)
@@ -26,6 +25,6 @@ class UserWeatherApiController extends Controller
         $user_weather_data = $this->weather_api_service
             ->fetch_weather_data_for_a_user($user);
 
-        return response()->json(data: ["message" => "Hello World Show {$user->name}"]);
+        return response()->json(data: $user_weather_data);
     }
 }
