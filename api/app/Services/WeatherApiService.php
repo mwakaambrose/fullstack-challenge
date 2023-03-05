@@ -40,18 +40,17 @@ class WeatherApiService
                 ->delete();
             $weather = new Weather([
                 "type" => Weather::TYPES[0],
-                "weather" => json_encode($data["weather"]),
-                "main" => json_encode($data["main"]),
-                "wind" => json_encode($data["wind"]),
-                "rain" => json_encode(isset($data["rain"]) ?? []),
-                "clouds" => json_encode($data["clouds"]),
+                "weather" => json_encode(isset($data["weather"]) ? $data["weather"] : []),
+                "main" => json_encode(isset($data["main"]) ? $data["main"] : []),
+                "wind" => json_encode(isset($data["wind"]) ? $data["wind"] : []),
+                "rain" => json_encode(isset($data["rain"]) ? $data["rain"] :  []),
+                "clouds" => json_encode(isset($data["clouds"]) ? $data["clouds"] : []),
             ]);
             $weather->user()->associate($user);
             $weather->save();
             DB::commit();
         } catch (\Throwable $throwable) {
             DB::rollBack();
-            dd($throwable->getMessage());
             Log::error($throwable->getMessage());
         }
     }
@@ -135,12 +134,12 @@ class WeatherApiService
             key: Weather::CACHE_KEY . "-" . $user->id,
             default: function () use ($user) {
                 $current_weather = $user->weather()->whereType(Weather::TYPES[0])->first();
-                $weather_forecast = $user->weather()->whereType(Weather::TYPES[1])->first();
+                $weather_forecast = $user->weather()->whereType(Weather::TYPES[1])->get();
                 return [
                     "user" => $user,
                     "weather" => [
                         "current" => $current_weather,
-                        "forecast" => $weather_forecast,
+                        "forecasts" => $weather_forecast,
                     ],
                 ];
             }

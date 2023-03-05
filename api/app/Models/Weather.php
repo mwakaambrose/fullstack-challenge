@@ -25,6 +25,11 @@ class Weather extends Model
         "clouds",
     ];
 
+    // public function getCreatedAtAttribute()
+    // {
+    //     return $this->created_at->format("Y-m-d H:i:s");
+    // }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

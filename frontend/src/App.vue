@@ -5,9 +5,9 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <header>
     <div class="wrapper">
-      <nav>
+      <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
-      </nav>
+      </nav> -->
     </div>
   </header>
   <RouterView />

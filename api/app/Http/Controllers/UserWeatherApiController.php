@@ -3,28 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Helpers\ApiDecorator;
+use Illuminate\Http\Response;
 use App\Services\WeatherApiService;
 
-class UserWeatherApiController extends Controller
+class UserWeatherApiController extends ApiDecorator
 {
     public function __construct(private WeatherApiService $weather_api_service)
     {
     }
 
+    /**
+     * Display a listing of the users with their current 
+     * weather data.
+     *
+     * @return Response
+     */
     public function index()
     {
-        $users_weather_data = $this->weather_api_service
-            ->fetch_weather_data_for_all_user();
-
-        return response()->json(data: $users_weather_data);
+        try {
+            return $this->success(
+                data: $this->weather_api_service->fetch_weather_data_for_all_user()
+            );
+        } catch (\Throwable $th) {
+            return $this->error(data: $th->getMessage(), status: ApiDecorator::SERVER_ERROR);
+        }
     }
 
-    public function show(Request $request, User $user)
+    /**
+     * Display the detailed user weather data.
+     *
+     * @param  \App\Models\User  $user
+     * @return Response
+     */
+    public function show(User $user)
     {
-        $user_weather_data = $this->weather_api_service
-            ->fetch_weather_data_for_a_user($user);
-
-        return response()->json(data: $user_weather_data);
+        try {
+            return $this->success(
+                data: $this->weather_api_service->fetch_weather_data_for_a_user($user),
+            );
+        } catch (\Throwable $th) {
+            return $this->error(data: $th->getMessage(), status: ApiDecorator::SERVER_ERROR);
+        }
     }
 }
