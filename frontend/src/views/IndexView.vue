@@ -1,6 +1,7 @@
 <template>
   <main>
     <div class="flex flex-col items-center justify-center w-screen min-h-screen text-white p-10 bg-gray-900">
+      <h1 class="text-4xl font-bold">Weather App</h1>
       <div v-for="user in users" :key="user.id"
         class="flex flex-col space-y-6 w-full max-w-screen-md bg-gray-700 p-10 mt-10 rounded-xl ring-8 ring-white ring-opacity-40">
         <RouterLink :to="{ name: 'detail', params: { 'id': user.id } }">
@@ -11,47 +12,23 @@
                 {{ JSON.parse(user.weather.weather)[0].description.capitalize() }}
               </span>
             </div>
-            <svg v-if="JSON.parse(user.weather.weather)[0].main.includes('Sun')" class="h-8 w-8 fill-current"
-              xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path
-                d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79zM1 10.5h3v2H1zM11 .55h2V3.5h-2zm8.04 2.495l1.408 1.407-1.79 1.79-1.407-1.408zm-1.8 15.115l1.79 1.8 1.41-1.41-1.8-1.79zM20 10.5h3v2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-1 4h2v2.95h-2zm-7.45-.96l1.41 1.41 1.79-1.8-1.41-1.41z" />
-            </svg>
-            <svg v-if="JSON.parse(user.weather.weather)[0].main.includes('Clouds')" class="h-8 w-8 fill-current"
-              xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-              <path d="M0 0h24v24H0V0z" fill="none"></path>
-              <path
-                d="M12.01 6c2.61 0 4.89 1.86 5.4 4.43l.3 1.5 1.52.11c1.56.11 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3h-13c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.95 6 12.01 6m0-2C9.12 4 6.6 5.64 5.35 8.04 2.35 8.36.01 10.91.01 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96C18.68 6.59 15.65 4 12.01 4z">
-              </path>
-            </svg>
-            <svg v-if="JSON.parse(user.weather.weather)[0].main.includes('Rain')" xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512" class="w-8 h-8 fill-current">
-              <path
-                d="M398.2,137.208a144.013,144.013,0,0,0-284.545.979,122.364,122.364,0,0,0-64.357,32.926A109.4,109.4,0,0,0,16,249.619c0,31.119,12.789,60.762,36.01,83.469q2.84,2.776,5.845,5.347l11.327-33.981C56.091,289.3,48,270.017,48,249.619c0-42.362,35.724-78.015,81.329-81.168l14.055-.972.814-14.065a111.995,111.995,0,0,1,223.589-.22l.891,14.888,14.913.155c46.592.488,80.409,34.714,80.409,81.382,0,33.152-16.706,61.38-41.84,75.9L409.032,364.9a110.012,110.012,0,0,0,54.938-32.358C484.625,310.339,496,280.889,496,249.619,496,190.507,454.859,144.4,398.2,137.208Z">
-              </path>
-              <polygon points="126.029 496 159.817 496 223.153 309.136 192.847 298.864 126.029 496"></polygon>
-              <polygon points="294.029 496 327.817 496 391.153 309.136 360.847 298.864 294.029 496"></polygon>
-              <polygon points="290.11 251.033 225.781 448 259.445 448 320.529 260.967 290.11 251.033"></polygon>
-              <polygon points="128.791 251.033 64.461 448 98.125 448 159.209 260.967 128.791 251.033"></polygon>
-            </svg>
-            <svg v-if="JSON.parse(user.weather.weather)[0].main.includes('Clear')" xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512" class="w-8 h-8 fill-current">
-              <path
-                d="M399.667,264.875v-3.813c0-79.4-64.6-144-144-144-2.2,0-4.391.057-6.569.156A116.689,116.689,0,1,0,112.315,247.444c-.422,4.484-.648,9.025-.648,13.618v3.813A116.633,116.633,0,0,0,132.287,496.3H379.046a116.633,116.633,0,0,0,20.621-231.427ZM48.75,132.688a84.677,84.677,0,0,1,168.705-10.47,144.606,144.606,0,0,0-98.59,93.876A84.807,84.807,0,0,1,48.75,132.688ZM379.046,464.3H132.287a84.619,84.619,0,0,1-3.9-169.148l15.277-.69v-33.4a112,112,0,1,1,224,0v33.4l15.277.69a84.619,84.619,0,0,1-3.9,169.148Z">
-              </path>
-            </svg>
+            <WeatherIcon :weather="JSON.parse(user.weather.weather)[0].main" />
             <span class="font-semibold text-lg w-1/4 text-right">
               {{ JSON.parse(user.weather.main).temp_min }}° / {{ JSON.parse(user.weather.main).temp_max }}°
             </span>
           </div>
         </RouterLink>
       </div>
-      <!-- Component End  -->
+      <h5 class="mt-10 text-sm">&copy Mwaka Ambrose - Fullstack Challenge</h5>
     </div>
   </main>
 </template>
-<script>
+<script lang="ts">
+import WeatherIcon from "@/components/WeatherIcon.vue";
 export default {
+  components: {
+    WeatherIcon,
+  },
   data() {
     return {
       users: [],
@@ -62,7 +39,6 @@ export default {
       fetch("http://localhost/api/v1/users")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           this.users = data.data;
         });
     },

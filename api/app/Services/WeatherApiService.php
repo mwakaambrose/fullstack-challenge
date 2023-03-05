@@ -26,7 +26,7 @@ class WeatherApiService
             "lat" => $user->latitude,
             "lon" => $user->longitude,
             "appid" => $api_key,
-            "units" => "imperial",
+            "units" => "metric",
         ])->json();
 
         if ($data["cod"] != 200) {
@@ -69,7 +69,8 @@ class WeatherApiService
             "lat" => $user->latitude,
             "lon" => $user->longitude,
             "appid" => $api_key,
-            "units" => "imperial",
+            "units" => "metric",
+            "cnt" => "5"
         ])->json();
 
 
