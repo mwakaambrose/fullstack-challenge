@@ -72,8 +72,7 @@ class WeatherApiService
             "units" => "metric",
             "cnt" => "5"
         ])->json();
-
-
+        
         if ($data["cod"] != 200) {
             throw new Exception($data["message"]);
         }

@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Weather;
 use App\Services\WeatherApiService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
