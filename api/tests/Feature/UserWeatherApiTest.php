@@ -35,18 +35,13 @@ class UserWeatherApiTest extends TestCase
             ]);
     }
 
-    public function test_can_fetch_users_with_their_current_weather_data_and_weather_forecast_data()
+    public function test_can_fetch_users_with_their_weather_data_and_weather_forecast_data()
     {
         User::factory(count: 2)->create();
         Weather::factory(count: 20)->create();
-
         $user = User::inRandomOrder()->first();
-
-        $current_weather = $user->weather()->whereType(Weather::TYPES[0])->first();
         $weather_forecast = $user->weather()->whereType(Weather::TYPES[1])->get();
-
-        dd($current_weather->getAttributes(), $weather_forecast->toArray());
-
+        
         $this->get(uri: "/api/v1/users/{$user->id}")
             ->assertStatus(200)
             ->assertJsonStructure(structure: [
@@ -66,7 +61,6 @@ class UserWeatherApiTest extends TestCase
                 "data" => [
                     "user" => $user->toArray(),
                     "weather" => [
-                        "current" => $current_weather->getAttributes(),
                         "forecasts" => $weather_forecast->toArray(),
                     ],
                 ]
