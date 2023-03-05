@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use Exception;
 use App\Models\User;
 use App\Models\Weather;
-use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
@@ -95,7 +95,6 @@ class WeatherApiService
                 $weather->user()->associate($user);
                 $weather->save();
             }
-            // cache the data for 30mins ???
             DB::commit();
         } catch (\Throwable $throwable) {
             DB::rollBack();

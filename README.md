@@ -1,5 +1,8 @@
 # Fullstack Challenge
 
+Mwaka Ambrose (ambrosemwaka@gmail.com)
+
+![user detail weather data screen](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
 ## Instructions
 Using Laravel and VueJS, create an application which shows the weather for a set of users.
 - Clone this repository. 

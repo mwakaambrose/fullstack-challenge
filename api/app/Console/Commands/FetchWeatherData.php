@@ -3,12 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
-use App\Models\Weather;
-use App\Services\WeatherApiService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
+use App\Services\WeatherApiService;
 use Illuminate\Support\Facades\Cache;
 
 class FetchWeatherData extends Command
@@ -37,5 +33,6 @@ class FetchWeatherData extends Command
             WeatherApiService::getUsersCurrentWeather($user);
             WeatherApiService::getUsers5DayWeatherForecast($user);
         }
+        Cache::flush();
     }
 }
