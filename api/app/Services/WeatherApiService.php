@@ -91,6 +91,7 @@ class WeatherApiService
                     "wind" => json_encode($weather_data["wind"]),
                     "rain" => json_encode(isset($weather_data["rain"]) ?? []),
                     "clouds" => json_encode($weather_data["clouds"]),
+                    "datetime_txt" => $weather_data["dt_txt"],
                 ]);
                 $weather->user()->associate($user);
                 $weather->save();

@@ -7,7 +7,7 @@
         <RouterLink :to="{ name: 'detail', params: { 'id': user.id } }">
           <div class="flex justify-between items-center">
             <span class="font-semibold text-lg w-1/4">{{ user.name }}</span>
-            <div class="flex items-center justify-end w-1/4 pr-10">
+            <div class="flex items-center w-1/4 pr-10">
               <span class="font-semibold">
                 {{ JSON.parse(user.weather.weather)[0].description.capitalize() }}
               </span>

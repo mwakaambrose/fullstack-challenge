@@ -29,14 +29,16 @@
       <div
         class="flex flex-col space-y-6 w-full max-w-screen-md bg-gray-700 p-10 mt-10 rounded-xl ring-8 ring-white ring-opacity-40">
         <div v-for="forecast in weather.forecasts" :key="forecast.id" class="flex justify-between items-center">
-          <span class="font-semibold text-lg w-1/4">Fri, 22 Jan</span>
-          <div class="flex items-center justify-end w-1/4 pr-10">
-            <span class="font-semibold">
+          <span class="font-semibold w-2/4">
+            {{ prepDate(forecast.datetime_txt) }} - {{ forecast.datetime_txt.split(" ")[1] }}
+          </span>
+          <div class="flex items-center w-1/4 pr-10">
+            <span class="font-semibold overflow-hidden">
               {{ JSON.parse(forecast.weather)[0].description.capitalize() }}
             </span>
           </div>
           <WeatherIcon :weather="JSON.parse(forecast.weather)[0].main" />
-          <span class="font-semibold text-lg w-1/4 text-right">
+          <span class="font-semibold w-1/4 text-right">
             {{ JSON.parse(forecast.main).temp_min }}° / {{ JSON.parse(forecast.main).temp_max }}°
           </span>
         </div>
@@ -75,6 +77,11 @@ export default {
           this.weather = data.data.weather;
           this.isLoading = false;
         });
+    },
+    prepDate(date: string) {
+      const dateObj = new Date(date);
+      const options  = { year: "numeric", month: "long", day: "numeric" };
+      return dateObj.toLocaleDateString("en-US", options);
     },
   },
   created() {

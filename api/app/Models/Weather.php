@@ -23,12 +23,8 @@ class Weather extends Model
         "wind",
         "rain",
         "clouds",
+        "datetime_txt",
     ];
-
-    // public function getCreatedAtAttribute()
-    // {
-    //     return $this->created_at->format("Y-m-d H:i:s");
-    // }
 
     public function user(): BelongsTo
     {

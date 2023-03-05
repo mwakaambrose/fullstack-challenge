@@ -22,6 +22,7 @@ return new class extends Migration
             $table->json(column: 'wind');
             $table->json(column: 'rain');
             $table->json(column: 'clouds');
+            $table->text(column: 'datetime_txt')->nullable();
             $table->timestamps();
         });
     }
